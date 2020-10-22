@@ -52,67 +52,67 @@ int main() {
 
 		  // Display calendar
 		  bool isUserYearLeap = (userYear % 4 == 0 or userYear % 400 == 0) and userYear % 100 != 0;
-		  short feblastDay = isUserYearLeap ? 29 : 28 ;
-		  short lastDay, firstDayOfMonth = 1, numberOfCell = 0, offSet = 0;
+		  int feblastDay = isUserYearLeap ? 29 : 28 ;
+		  int lastDay, numberOfCells, numberOfWeeks, day, offSet = 0;
 
         for (int month = 1; month <= 12 ; ++month) {
-           switch (month) {
-             case 1:  {
+           switch (Months(month)) {
+             case Months::JAN:  {
                 lastDay = 31;
                 cout << "JANVIER";
                 break;
              }
-             case 2:  {
+             case Months::FEB:  {
                 lastDay = feblastDay;
                 cout << "FEVRIER";
                 break;
              }
-             case 3: {
+             case Months::MAR: {
                 lastDay = 31;
                 cout << "MARS";
                 break;
              }
-             case 4: {
+             case Months::APR: {
                 lastDay = 30;
                 cout << "AVRIL";
                 break;
              }
-             case 5: {
+             case Months::MAY: {
                 lastDay = 31;
                 cout << "MAI";
                 break;
              }
-             case 6: {
+             case Months::JUN: {
                 lastDay = 30;
                 cout << "JUIN"
                 ; break;
              }
-             case 7: {
+             case Months::JUL: {
                 lastDay = 31;
                 cout << "JUILLET";
                 break;
              }
-             case 8: {
+             case Months::AUG: {
                 lastDay = 31;
                 cout << "AOUT";
                 break;
              }
-             case 9: {
+             case Months::SEP: {
                 lastDay = 30;
                 cout << "SEPTEMBRE";
                 break;
              }
-             case 10: {
+             case Months::OCT: {
                 lastDay = 31;
                 cout << "OCTOBRE";
                 break;
              }
-             case 11: {
+             case Months::NOV: {
                 lastDay = 30;
                 cout << "NOVEMBRE";
                 break;
              }
-             case 12:{
+             case Months::DEC:{
                 lastDay = 31;
                 cout << "DECEMBRE";
                 break;
@@ -130,32 +130,30 @@ int main() {
                 << left << setw(3) << "D"
                 << endl;
 
-            numberOfCell = lastDay + offSet;
-            short numberOfLine = ceil(numberOfCell / 7.);
-            short day = 1;
+            numberOfCells = lastDay + offSet;
+            numberOfWeeks = ceil(numberOfCells / 7.);
+            day = 1;
 
-           for (int line = 1; line <= numberOfLine; ++line) {
+           for (int week = 1; week <= numberOfWeeks; ++week) {
               for (int col = 1; col <= 7; ++col) {
-                 if (col <= offSet and line == 1) {
+                 if (col <= offSet and week == 1) {
                     cout << left << setw(3) << "";
                  } else {
                     cout << left << setw(3) << day;
+
                     if (day == lastDay) {
                        break;
                     } else {
                        ++day;
                     }
                  }
-
-                 if (col == 7) {
-                    cout << endl;
-                 }
               }
+              cout << endl;
            }
 
-           offSet = numberOfCell % 7;
+           offSet = numberOfCells % 7;
 
-           cout << endl << endl;
+           cout << endl;
         }
 
 		  cout << "Voulez-vous recommencer ? [O/N]";
