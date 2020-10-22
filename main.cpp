@@ -44,18 +44,17 @@ int main() {
 				isIncorrect = cin.fail() || userYear < MIN_YEAR || userYear > MAX_YEAR;
 
 				if (isIncorrect) {
-					 cout << endl << "/!\\ recommencer" << endl;
+				   cout << endl << "/!\\ recommencer" << endl;
 				}
 		  } while (isIncorrect);
 
-		  // cout << "Votre numéro est : " << userYear << endl;
-
 		  // Display calendar
-		  bool isUserYearLeap = (userYear % 4 == 0 or userYear % 400 == 0) and userYear % 100 != 0;
+		  bool isUserYearLeap = (userYear % 4 == 0 || userYear % 400 == 0) && userYear % 100 != 0;
 		  int feblastDay = isUserYearLeap ? 29 : 28 ;
-		  int lastDay, numberOfCells, numberOfWeeks, day, offSet = 0;
+		  int offset = 0;
 
         for (int month = 1; month <= 12 ; ++month) {
+           int lastDay;
            switch (Months(month)) {
              case Months::JAN:  {
                 lastDay = 31;
@@ -130,13 +129,13 @@ int main() {
                 << left << setw(3) << "D"
                 << endl;
 
-            numberOfCells = lastDay + offSet;
-            numberOfWeeks = ceil(numberOfCells / 7.);
-            day = 1;
+            int numberOfCells = lastDay + offset;
+            int numberOfWeeks = ceil(numberOfCells / 7.);
+            int day = 1;
 
            for (int week = 1; week <= numberOfWeeks; ++week) {
               for (int col = 1; col <= 7; ++col) {
-                 if (col <= offSet and week == 1) {
+                 if (col <= offset && week == 1) {
                     cout << left << setw(3) << "";
                  } else {
                     cout << left << setw(3) << day;
@@ -151,7 +150,7 @@ int main() {
               cout << endl;
            }
 
-           offSet = numberOfCells % 7;
+           offset = numberOfCells % 7;
 
            cout << endl;
         }
