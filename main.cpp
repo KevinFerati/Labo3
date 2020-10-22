@@ -15,6 +15,7 @@
 #include <iostream>
 #include <climits>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
@@ -52,7 +53,7 @@ int main() {
 		  // Display calendar
 		  bool isUserYearLeap = (userYear % 4 == 0 or userYear % 400 == 0) and userYear % 100 != 0;
 		  short feblastDay = isUserYearLeap ? 29 : 28 ;
-		  short lastDay, firstDayOfMonth = 1;
+		  short lastDay, firstDayOfMonth = 1, numberOfCell = 0, offSet = 0;
 
         for (int month = 1; month <= 12 ; ++month) {
            switch (month) {
@@ -120,8 +121,6 @@ int main() {
 
            cout << " " << userYear << endl;
 
-           short day = 1;
-
            cout << left << setw(3) << "L"
                 << left << setw(3) << "M"
                 << left << setw(3) << "M"
@@ -130,28 +129,33 @@ int main() {
                 << left << setw(3) << "S"
                 << left << setw(3) << "D"
                 << endl;
-           for (int week = 1; week <= 5; ++week) {
 
-              for (int dayOfWeek = 1; dayOfWeek <= 7; ++dayOfWeek) {
-                 if (day * week < firstDayOfMonth) {
+            numberOfCell = lastDay + offSet;
+            short numberOfLine = ceil(numberOfCell / 7.);
+            short day = 1;
+
+           for (int line = 1; line <= numberOfLine; ++line) {
+              for (int col = 1; col <= 7; ++col) {
+                 if (col <= offSet and line == 1) {
                     cout << left << setw(3) << "";
                  } else {
                     cout << left << setw(3) << day;
+                    if (day == lastDay) {
+                       break;
+                    } else {
+                       ++day;
+                    }
                  }
 
-                  if (day == lastDay){
-                     firstDayOfMonth = dayOfWeek + 1;
-                     break;
-                  } else {
-                     ++day;
-                  }
-
+                 if (col == 7) {
+                    cout << endl;
+                 }
               }
-
-              cout << endl;
-
            }
-           cout << endl;
+
+           offSet = numberOfCell % 7;
+
+           cout << endl << endl;
         }
 
 		  cout << "Voulez-vous recommencer ? [O/N]";
