@@ -29,14 +29,14 @@ int main() {
 	 enum class Months {
 		  JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
 	 };
-	 enum Days {
-		  MONDAY = 'L',
-		  TUESDAY = 'M',
+	 enum class Days {
+		  MONDAY    = 'L',
+		  TUESDAY   = 'M',
 		  WEDNESDAY = 'M',
-		  THURSDAY = 'J',
-		  FRIDAY = 'V',
-		  SATURDAY = 'S',
-		  SUNDAY = 'D'
+		  THURSDAY  = 'J',
+		  FRIDAY    = 'V',
+		  SATURDAY  = 'S',
+		  SUNDAY    = 'D'
 	 };
 
 	 cout << "Bonjour" << endl
@@ -140,13 +140,13 @@ int main() {
 				const int CELL_WIDTH = 3,
 						  DAYS_IN_WEEK = 7;
 
-				cout << right << setw(CELL_WIDTH) << Days::MONDAY
-					  << right << setw(CELL_WIDTH) << Days::TUESDAY
-					  << right << setw(CELL_WIDTH) << Days::WEDNESDAY
-					  << right << setw(CELL_WIDTH) << Days::THURSDAY
-					  << right << setw(CELL_WIDTH) << Days::FRIDAY
-					  << right << setw(CELL_WIDTH) << Days::SATURDAY
-					  << right << setw(CELL_WIDTH) << Days::SUNDAY
+				cout << right << setw(CELL_WIDTH) << (char) Days::MONDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::TUESDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::WEDNESDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::THURSDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::FRIDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::SATURDAY
+					  << right << setw(CELL_WIDTH) << (char) Days::SUNDAY
 					  << endl;
 
 				int numberOfCells = lastDay + offset;
